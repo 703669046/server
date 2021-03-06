@@ -3,6 +3,12 @@ const result = require('../../../libs/result');
 const ConnecDataBaseAPI = require('../../../libs/connectDatabase');
 const statusObj = require('../../../libs/statusCode')
 
+
+const getTimes = function () {
+    let s = new Date().getTime().toString();
+    s = s.substr(0, s.length - 3)
+    return s;
+}
 const getList = async function (id, pageSize, currPage, total, collback) {
     let s = (currPage - 1) * pageSize
     let sql = `select * from blogs_post where category=${id} limit ${s},${pageSize}`;
@@ -61,6 +67,15 @@ const getPostPraiseType = async function (id,myId,collback){
         collback(0);
     }
 }
+const getPostCollectType = async function (id,myId,collback){
+    let sql = `select * from blogs_collect where post_id=${id} and user_collect_id=${myId} limit 1`;
+    let result = await ConnecDataBaseAPI(sql);
+    if(result.length){
+        collback(result[0].collect)
+    }else{
+        collback(0);
+    }
+}
 // 获取 收藏总数
 const getPostCollectCount = async function (id, collback) {
     let sql = `select * from blogs_collect where post_id=${id}`;
@@ -75,7 +90,7 @@ const formatDate = function (timestamp) {
     let h = date.getHours() + ':';
     let m = date.getMinutes() + ':';
     let s = date.getSeconds();
-    return Y + M + D + h + m + s;
+    return Y + M + D
 }
 // 帖子详情  
 async function postInfo(req, res) {
@@ -96,7 +111,14 @@ async function postInfo(req, res) {
     })
     await getPostPraiseType(id,myId,item=>{
         obj.praise = item;
-    })
+    });
+    await getPostCollectType(id,myId,item=>{
+        obj.collect = item;
+    });
+    let browse = obj.browse;
+    browse+=1
+    sql = `UPDATE blogs_post SET browse=${browse},update_time='${getTimes()}' WHERE id=${id}`;
+    results = await ConnecDataBaseAPI(sql);
     res.send(result.success(obj));
 }
 module.exports = {

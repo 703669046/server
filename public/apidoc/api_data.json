@@ -120,9 +120,79 @@
   },
   {
     "type": "post",
+    "url": "/index/post/collect",
+    "title": "帖子收藏",
+    "description": "<p>帖子收藏</p>",
+    "group": "PC端_帖子",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>帖子id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "collectType",
+            "description": "<p>操作类型</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "myId",
+            "description": "<p>用户id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "userId",
+            "description": "<p>发布者id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "result",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n   \"data\": {\n       \"list\": [],\n       \"total\": 3,\n       \"pageSize\": \"10\",\n       \"currPage\": \"3\"\n   },\n   \"code\": 200,\n   \"success\": true,\n   \"message\": \"请求成功\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:3333/index/post/collect"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "src/index/index.js",
+    "groupTitle": "PC端_帖子",
+    "name": "PostIndexPostCollect"
+  },
+  {
+    "type": "post",
     "url": "/index/post/praises",
     "title": "帖子点赞",
-    "description": "<p>分页查询</p>",
+    "description": "<p>帖子点赞</p>",
     "group": "PC端_帖子",
     "parameter": {
       "fields": {

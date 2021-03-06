@@ -3,6 +3,7 @@ const constroller = require('./constroller/Login')
 const constroller2 = require('./constroller/Captcha')
 const constroller3 = require('./constroller/Post')
 const constroller4 = require('./constroller/Praise')
+const constroller5 = require('./constroller/Collect')
 
 
 const route = express.Router(); //创建路由路径的链式路由句柄。
@@ -135,7 +136,7 @@ route.get('/index/post/info', (req, res) => {
 
 /**
  * @api {post} /index/post/praises 帖子点赞
- * @apiDescription 分页查询
+ * @apiDescription 帖子点赞
  * @apiGroup PC端 帖子
  * @apiParam {int} id 帖子id
  * @apiParam {Boolean} praiseType 操作类型
@@ -157,9 +158,38 @@ route.get('/index/post/info', (req, res) => {
  * @apiSampleRequest http://localhost:3333/index/post/praises
  * @apiVersion 1.0.0
  */
-// 帖子分页查询
+// 帖子点赞
 route.post('/index/post/praises', (req, res) => {
     constroller4.setPraise(req, res);
+});
+
+/**
+ * @api {post} /index/post/collect 帖子收藏
+ * @apiDescription 帖子收藏
+ * @apiGroup PC端 帖子
+ * @apiParam {int} id 帖子id
+ * @apiParam {Boolean} collectType 操作类型
+ * @apiParam {int} myId 用户id
+ * @apiParam {int} userId 发布者id
+ * @apiSuccess {Object} result
+ * @apiSuccessExample {json} Success-Response:
+ {
+    "data": {
+        "list": [],
+        "total": 3,
+        "pageSize": "10",
+        "currPage": "3"
+    },
+    "code": 200,
+    "success": true,
+    "message": "请求成功"
+ }
+ * @apiSampleRequest http://localhost:3333/index/post/collect
+ * @apiVersion 1.0.0
+ */
+// 帖子点赞
+route.post('/index/post/collect', (req, res) => {
+    constroller5.setCollect(req, res);
 });
 
 module.exports = () => {
