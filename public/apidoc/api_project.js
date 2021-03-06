@@ -1,0 +1,21 @@
+define({
+  "title": "cms-server API",
+  "url": "http://localhost:3333",
+  "name": "宝贝持有者的心情记录",
+  "version": "1.0.0",
+  "description": "宝贝持有者的心情记录项目API文档",
+  "sampleUrl": "http://localhost:3333",
+  "forceLanguage": "zh-cn",
+  "template": {
+    "withCompare": true,
+    "withGenerator": true
+  },
+  "defaultVersion": "0.0.0",
+  "apidoc": "0.3.0",
+  "generator": {
+    "name": "apidoc",
+    "time": "2021-03-06T16:40:28.725Z",
+    "url": "https://apidocjs.com",
+    "version": "0.26.0"
+  }
+});

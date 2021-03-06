@@ -1,0 +1,14 @@
+{
+    "name": "宝贝持有者的心情记录",
+    "version": "1.0.0",
+    "description": "宝贝持有者的心情记录项目API文档", 
+    "title": "cms-server API", 
+    "url" : "http://localhost:3333",
+    "sampleUrl": "http://localhost:3333",
+    "forceLanguage":"zh-cn",
+    "template": {
+      "withCompare": true,
+      "withGenerator": true
+    }
+   
+}  
