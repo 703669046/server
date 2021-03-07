@@ -198,9 +198,9 @@ route.post('/index/post/collect', (req, res) => {
  * @apiDescription 帖子评论
  * @apiGroup PC端 帖子
  * @apiParam {int} id 帖子id
- * @apiParam {Boolean} collectType 操作类型
+ * @apiParam {string} context 评论内容
+ * @apiParam {int} replyUserId 被回复者id
  * @apiParam {int} myId 用户id
- * @apiParam {int} userId 发布者id
  * @apiSuccess {Object} result
  * @apiSuccessExample {json} Success-Response:
  {
@@ -224,13 +224,10 @@ route.post('/index/post/comment', (req, res) => {
 
 
 /**
- * @api {post} /index/post/commentList 帖子评论
- * @apiDescription 帖子评论
+ * @api {get} /index/post/commentList 帖子评论列表
+ * @apiDescription 帖子评论列表
  * @apiGroup PC端 帖子
  * @apiParam {int} id 帖子id
- * @apiParam {Boolean} collectType 操作类型
- * @apiParam {int} myId 用户id
- * @apiParam {int} userId 发布者id
  * @apiSuccess {Object} result
  * @apiSuccessExample {json} Success-Response:
  {
@@ -247,10 +244,12 @@ route.post('/index/post/comment', (req, res) => {
  * @apiSampleRequest http://localhost:3333:/index/post/commentList
  * @apiVersion 1.0.0
  */
-// 帖子评论
+// 帖子评论列表
 route.get('/index/post/commentList', (req, res) => {
     constroller6.CommentList(req, res);
 });
+
+
 module.exports = () => {
     return route;
 }

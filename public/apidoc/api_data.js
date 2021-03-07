@@ -1,6 +1,55 @@
 define({ "api": [
   {
     "type": "get",
+    "url": "/index/post/commentList",
+    "title": "帖子评论列表",
+    "description": "<p>帖子评论列表</p>",
+    "group": "PC端_帖子",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>帖子id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "result",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n   \"data\": {\n       \"list\": [],\n       \"total\": 3,\n       \"pageSize\": \"10\",\n       \"currPage\": \"3\"\n   },\n   \"code\": 200,\n   \"success\": true,\n   \"message\": \"请求成功\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:3333:/index/post/commentList"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "src/index/index.js",
+    "groupTitle": "PC端_帖子",
+    "name": "GetIndexPostCommentlist"
+  },
+  {
+    "type": "get",
     "url": "/index/post/info",
     "title": "帖子详情",
     "description": "<p>帖子详情</p>",
@@ -187,6 +236,76 @@ define({ "api": [
     "filename": "src/index/index.js",
     "groupTitle": "PC端_帖子",
     "name": "PostIndexPostCollect"
+  },
+  {
+    "type": "post",
+    "url": "/index/post/comment",
+    "title": "帖子评论",
+    "description": "<p>帖子评论</p>",
+    "group": "PC端_帖子",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>帖子id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "context",
+            "description": "<p>评论内容</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "replyUserId",
+            "description": "<p>被回复者id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "myId",
+            "description": "<p>用户id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "result",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n   \"data\": {\n       \"list\": [],\n       \"total\": 3,\n       \"pageSize\": \"10\",\n       \"currPage\": \"3\"\n   },\n   \"code\": 200,\n   \"success\": true,\n   \"message\": \"请求成功\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:3333/index/post/comment"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "src/index/index.js",
+    "groupTitle": "PC端_帖子",
+    "name": "PostIndexPostComment"
   },
   {
     "type": "post",
