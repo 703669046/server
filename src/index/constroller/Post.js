@@ -82,6 +82,7 @@ const getPostCollectCount = async function (id, collback) {
     let results = await ConnecDataBaseAPI(sql)
     collback(results.length);
 }
+
 const formatDate = function (timestamp) {
     let date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
     let Y = date.getFullYear() + '-';

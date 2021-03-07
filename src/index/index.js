@@ -4,6 +4,7 @@ const constroller2 = require('./constroller/Captcha')
 const constroller3 = require('./constroller/Post')
 const constroller4 = require('./constroller/Praise')
 const constroller5 = require('./constroller/Collect')
+const constroller6 = require('./constroller/Comment')
 
 
 const route = express.Router(); //创建路由路径的链式路由句柄。
@@ -187,11 +188,69 @@ route.post('/index/post/praises', (req, res) => {
  * @apiSampleRequest http://localhost:3333/index/post/collect
  * @apiVersion 1.0.0
  */
-// 帖子点赞
+// 帖子点赞 
 route.post('/index/post/collect', (req, res) => {
     constroller5.setCollect(req, res);
 });
 
+/**
+ * @api {post} /index/post/comment 帖子评论
+ * @apiDescription 帖子评论
+ * @apiGroup PC端 帖子
+ * @apiParam {int} id 帖子id
+ * @apiParam {Boolean} collectType 操作类型
+ * @apiParam {int} myId 用户id
+ * @apiParam {int} userId 发布者id
+ * @apiSuccess {Object} result
+ * @apiSuccessExample {json} Success-Response:
+ {
+    "data": {
+        "list": [],
+        "total": 3,
+        "pageSize": "10",
+        "currPage": "3"
+    },
+    "code": 200,
+    "success": true,
+    "message": "请求成功"
+ }
+ * @apiSampleRequest http://localhost:3333/index/post/comment
+ * @apiVersion 1.0.0
+ */
+// 帖子评论
+route.post('/index/post/comment', (req, res) => {
+    constroller6.addComment(req, res);
+});
+
+
+/**
+ * @api {post} /index/post/commentList 帖子评论
+ * @apiDescription 帖子评论
+ * @apiGroup PC端 帖子
+ * @apiParam {int} id 帖子id
+ * @apiParam {Boolean} collectType 操作类型
+ * @apiParam {int} myId 用户id
+ * @apiParam {int} userId 发布者id
+ * @apiSuccess {Object} result
+ * @apiSuccessExample {json} Success-Response:
+ {
+    "data": {
+        "list": [],
+        "total": 3,
+        "pageSize": "10",
+        "currPage": "3"
+    },
+    "code": 200,
+    "success": true,
+    "message": "请求成功"
+ }
+ * @apiSampleRequest http://localhost:3333:/index/post/commentList
+ * @apiVersion 1.0.0
+ */
+// 帖子评论
+route.get('/index/post/commentList', (req, res) => {
+    constroller6.CommentList(req, res);
+});
 module.exports = () => {
     return route;
 }

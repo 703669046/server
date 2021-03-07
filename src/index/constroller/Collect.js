@@ -1,4 +1,4 @@
-const common = require('../../../libs/common');
+
 const response = require('../../../libs/result');
 const ConnecDataBaseAPI = require('../../../libs/connectDatabase');
 const statusObj = require('../../../libs/statusCode')
