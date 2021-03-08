@@ -25,7 +25,7 @@ async function postPageList(req, res) {
         res.send(result.fail(statusObj.statusArr[2].code, statusObj.statusArr[2].title));
         return;
     }
-    let sql = `select * from blogs_post where category=${id}`, size;
+    let sql = `select * from blogs_post where category=${id} and type=3`, size;
     let data = await ConnecDataBaseAPI(sql);
     size = data.length;
     getList(id, pageSize, currPage, size, (list) => {
@@ -37,19 +37,6 @@ async function postPageList(req, res) {
         }
         res.send(result.success(obj));
     })
-    // connect.query(sql, (err, data) => {
-    //     size = data.length;
-    //     getList(id, pageSize, currPage, size, (err, list) => {
-    //         let obj = {
-    //             list: [...list],
-    //             total: size,
-    //             pageSize: pageSize,
-    //             currPage: currPage
-    //         }
-    //         res.send(result.success(obj));
-    //     })
-    // });
-
 }
 
 // 获取 点赞总数
@@ -58,21 +45,21 @@ const getPostCount = async function (id, collback) {
     let results = await ConnecDataBaseAPI(sql)
     collback(results.length);
 }
-const getPostPraiseType = async function (id,myId,collback){
+const getPostPraiseType = async function (id, myId, collback) {
     let sql = `select * from blogs_praise where post_id=${id} and user_parise_id=${myId} limit 1`;
     let result = await ConnecDataBaseAPI(sql);
-    if(result.length){
+    if (result.length) {
         collback(result[0].praise)
-    }else{
+    } else {
         collback(0);
     }
 }
-const getPostCollectType = async function (id,myId,collback){
+const getPostCollectType = async function (id, myId, collback) {
     let sql = `select * from blogs_collect where post_id=${id} and user_collect_id=${myId} limit 1`;
     let result = await ConnecDataBaseAPI(sql);
-    if(result.length){
+    if (result.length) {
         collback(result[0].collect)
-    }else{
+    } else {
         collback(0);
     }
 }
@@ -95,7 +82,7 @@ const formatDate = function (timestamp) {
 }
 // 帖子详情  
 async function postInfo(req, res) {
-    let id = req.query.id,myId = req.query.myId;
+    let id = req.query.id, myId = req.query.myId;
     if (!id) {
         res.send(result.fail(statusObj.statusArr[2].code, statusObj.statusArr[2].title));
         return;
@@ -107,21 +94,48 @@ async function postInfo(req, res) {
     await getPostCount(id, (s) => {
         obj.praises = s
     });
-    await getPostCollectCount(id,count=>{
+    await getPostCollectCount(id, count => {
         obj.collects = count;
     })
-    await getPostPraiseType(id,myId,item=>{
+    await getPostPraiseType(id, myId, item => {
         obj.praise = item;
     });
-    await getPostCollectType(id,myId,item=>{
+    await getPostCollectType(id, myId, item => {
         obj.collect = item;
     });
     let browse = obj.browse;
-    browse+=1
+    browse += 1
     sql = `UPDATE blogs_post SET browse=${browse},update_time='${getTimes()}' WHERE id=${id}`;
     results = await ConnecDataBaseAPI(sql);
     res.send(result.success(obj));
 }
+
+const getPostList = async function (id, pageSize, currPage, total, collback) {
+    let s = (currPage - 1) * pageSize
+    let sql = `select * from blogs_post where publisher_id=${id} limit ${s},${pageSize}`;
+    let data = await ConnecDataBaseAPI(sql);
+    collback(data)
+}
+// 我发布的帖子
+async function myPostList(req,res){
+    let id = req.query.id, pageSize = req.query.pageSize, currPage = req.query.currPage;
+    if (!id || !pageSize || !currPage) {
+        res.send(result.fail(statusObj.statusArr[2].code, statusObj.statusArr[2].title));
+        return;
+    }
+    let sql = `select * from blogs_post where publisher_id=${id}`, size;
+    let data = await ConnecDataBaseAPI(sql);
+    size = data.length;
+    getPostList(id, pageSize, currPage, size, (list) => {
+        let obj = {
+            list: [...list],
+            total: size,
+            pageSize: pageSize,
+            currPage: currPage
+        }
+        res.send(result.success(obj));
+    })
+}
 module.exports = {
-    postPageList,postInfo
+    postPageList, postInfo,myPostList
 }

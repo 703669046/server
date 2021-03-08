@@ -129,7 +129,7 @@ route.get('/index/postListPage', (req, res) => {
  * @apiSampleRequest http://localhost:3333/index/post/info
  * @apiVersion 1.0.0
  */
-// 帖子分页查询
+// 帖子详情
 route.get('/index/post/info', (req, res) => {
     constroller3.postInfo(req, res);
 });
@@ -353,6 +353,34 @@ route.get('/index/my/collectList', (req, res) => {
 // 我的点赞
 route.get('/index/my/praiseList', (req, res) => {
     constroller4.myPraiseList(req, res);
+});
+
+/**
+ * @api {get} /index/my/postlist 我发布的帖子
+ * @apiDescription 我发布的帖子
+ * @apiGroup PC端 个人中心
+ * @apiParam {int} id 用户id
+ * @apiParam {int} pageSize 条数
+ * @apiParam {int} currPage 当前页
+ * @apiSuccess {Object} result
+ * @apiSuccessExample {json} Success-Response:
+ {
+    "data": {
+        "list": [],
+        "total": 3,
+        "pageSize": "10",
+        "currPage": "3"
+    },
+    "code": 200,
+    "success": true,
+    "message": "请求成功"
+ }
+ * @apiSampleRequest http://localhost:3333/index/my/postlist
+ * @apiVersion 1.0.0
+ */
+// 帖子分页查询
+route.get('/index/my/postlist', (req, res) => {
+    constroller3.myPostList(req, res);
 });
 module.exports = () => {
     return route;

@@ -1,6 +1,265 @@
 [
   {
     "type": "get",
+    "url": "/index/my/collectList",
+    "title": "我的收藏",
+    "description": "<p>我的收藏</p>",
+    "group": "PC端_个人中心",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "userId",
+            "description": "<p>用户id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "result",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n   \"data\": {\n       \"list\": [],\n       \"total\": 3,\n       \"pageSize\": \"10\",\n       \"currPage\": \"3\"\n   },\n   \"code\": 200,\n   \"success\": true,\n   \"message\": \"请求成功\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:3333:/index/my/collectList"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "src/index/index.js",
+    "groupTitle": "PC端_个人中心",
+    "name": "GetIndexMyCollectlist"
+  },
+  {
+    "type": "get",
+    "url": "/index/my/commentList",
+    "title": "我评论的帖子",
+    "description": "<p>我评论的帖子</p>",
+    "group": "PC端_个人中心",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "userId",
+            "description": "<p>用户id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "result",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n   \"data\": {\n       \"list\": [],\n       \"total\": 3,\n       \"pageSize\": \"10\",\n       \"currPage\": \"3\"\n   },\n   \"code\": 200,\n   \"success\": true,\n   \"message\": \"请求成功\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:3333:/index/my/commentList"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "src/index/index.js",
+    "groupTitle": "PC端_个人中心",
+    "name": "GetIndexMyCommentlist"
+  },
+  {
+    "type": "get",
+    "url": "/index/my/postlist",
+    "title": "我发布的帖子",
+    "description": "<p>我发布的帖子</p>",
+    "group": "PC端_个人中心",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>用户id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "pageSize",
+            "description": "<p>条数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "currPage",
+            "description": "<p>当前页</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "result",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n   \"data\": {\n       \"list\": [],\n       \"total\": 3,\n       \"pageSize\": \"10\",\n       \"currPage\": \"3\"\n   },\n   \"code\": 200,\n   \"success\": true,\n   \"message\": \"请求成功\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:3333/index/my/postlist"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "src/index/index.js",
+    "groupTitle": "PC端_个人中心",
+    "name": "GetIndexMyPostlist"
+  },
+  {
+    "type": "get",
+    "url": "/index/my/praiseList",
+    "title": "我的点赞",
+    "description": "<p>我的点赞</p>",
+    "group": "PC端_个人中心",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "userId",
+            "description": "<p>用户id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "result",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n   \"data\": {\n       \"list\": [],\n       \"total\": 3,\n       \"pageSize\": \"10\",\n       \"currPage\": \"3\"\n   },\n   \"code\": 200,\n   \"success\": true,\n   \"message\": \"请求成功\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:3333:/index/my/praiseList"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "src/index/index.js",
+    "groupTitle": "PC端_个人中心",
+    "name": "GetIndexMyPraiselist"
+  },
+  {
+    "type": "get",
+    "url": "/index/received/commentList",
+    "title": "我收到的评论",
+    "description": "<p>我收到的评论</p>",
+    "group": "PC端_个人中心",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "userId",
+            "description": "<p>用户id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "result",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n   \"data\": {\n       \"list\": [],\n       \"total\": 3,\n       \"pageSize\": \"10\",\n       \"currPage\": \"3\"\n   },\n   \"code\": 200,\n   \"success\": true,\n   \"message\": \"请求成功\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:3333:/index/received/commentList"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "src/index/index.js",
+    "groupTitle": "PC端_个人中心",
+    "name": "GetIndexReceivedCommentlist"
+  },
+  {
+    "type": "get",
     "url": "/index/post/commentList",
     "title": "帖子评论列表",
     "description": "<p>帖子评论列表</p>",
