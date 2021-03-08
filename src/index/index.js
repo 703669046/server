@@ -270,7 +270,7 @@ route.get('/index/post/commentList', (req, res) => {
  * @apiSampleRequest http://localhost:3333:/index/my/commentList
  * @apiVersion 1.0.0
  */
-// 帖子评论列表
+// 我的评论
 route.get('/index/my/commentList', (req, res) => {
     constroller6.myCommentList(req, res);
 });
@@ -297,7 +297,7 @@ route.get('/index/my/commentList', (req, res) => {
  * @apiSampleRequest http://localhost:3333:/index/received/commentList
  * @apiVersion 1.0.0
  */
-// 帖子评论列表
+// 我收到的评论
 route.get('/index/received/commentList', (req, res) => {
     constroller6.receivedCommentList(req, res);
 });
@@ -324,7 +324,7 @@ route.get('/index/received/commentList', (req, res) => {
  * @apiSampleRequest http://localhost:3333:/index/my/collectList
  * @apiVersion 1.0.0
  */
-// 帖子评论列表
+// 我的收藏
 route.get('/index/my/collectList', (req, res) => {
     constroller5.myCollectList(req, res);
 });
@@ -350,7 +350,7 @@ route.get('/index/my/collectList', (req, res) => {
  * @apiSampleRequest http://localhost:3333:/index/my/praiseList
  * @apiVersion 1.0.0
  */
-// 帖子评论列表
+// 我的点赞
 route.get('/index/my/praiseList', (req, res) => {
     constroller4.myPraiseList(req, res);
 });
