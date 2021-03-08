@@ -34,7 +34,24 @@ async function setPraise(req, res) {
     }
     res.send(response.success());
 }
-
+// 我的点赞
+async function myPraiseList(req,res){
+    let userId = req.query.userId;
+    if(userId == undefined){
+        res.send(response.fail(statusObj.statusArr[2].code, statusObj.statusArr[2].title));
+        return;
+    }
+    let sql = `SELECT a.*,b.id,b.title,b.icon_src,b.publisher_icon,b.publisher_name,b.source,b.context,b.category_title,c.path from blogs_praise a 
+    LEFT JOIN blogs_post b on a.post_id=b.id
+    LEFT JOIN blogs_auth c on b.category_title=c.auth_name WHERE a.user_parise_id=${userId} AND a.praise=1 ORDER BY a.create_time DESC`;
+    let result = await ConnecDataBaseAPI(sql);
+    let list = [];
+    if(result.length!=0){
+        list = result;
+    }
+    res.send(response.success(list));
+}
 module.exports = {
-    setPraise
+    setPraise,
+    myPraiseList
 }

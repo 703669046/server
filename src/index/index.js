@@ -188,7 +188,7 @@ route.post('/index/post/praises', (req, res) => {
  * @apiSampleRequest http://localhost:3333/index/post/collect
  * @apiVersion 1.0.0
  */
-// 帖子点赞 
+// 帖子收藏
 route.post('/index/post/collect', (req, res) => {
     constroller5.setCollect(req, res);
 });
@@ -249,7 +249,111 @@ route.get('/index/post/commentList', (req, res) => {
     constroller6.CommentList(req, res);
 });
 
+/**
+ * @api {get} /index/my/commentList 我评论的帖子
+ * @apiDescription 我评论的帖子
+ * @apiGroup PC端 个人中心
+ * @apiParam {int} userId 用户id
+ * @apiSuccess {Object} result
+ * @apiSuccessExample {json} Success-Response:
+ {
+    "data": {
+        "list": [],
+        "total": 3,
+        "pageSize": "10",
+        "currPage": "3"
+    },
+    "code": 200,
+    "success": true,
+    "message": "请求成功"
+ }
+ * @apiSampleRequest http://localhost:3333:/index/my/commentList
+ * @apiVersion 1.0.0
+ */
+// 帖子评论列表
+route.get('/index/my/commentList', (req, res) => {
+    constroller6.myCommentList(req, res);
+});
 
+
+/**
+ * @api {get} /index/received/commentList 我收到的评论
+ * @apiDescription 我收到的评论
+ * @apiGroup PC端 个人中心
+ * @apiParam {int} userId 用户id
+ * @apiSuccess {Object} result
+ * @apiSuccessExample {json} Success-Response:
+ {
+    "data": {
+        "list": [],
+        "total": 3,
+        "pageSize": "10",
+        "currPage": "3"
+    },
+    "code": 200,
+    "success": true,
+    "message": "请求成功"
+ }
+ * @apiSampleRequest http://localhost:3333:/index/received/commentList
+ * @apiVersion 1.0.0
+ */
+// 帖子评论列表
+route.get('/index/received/commentList', (req, res) => {
+    constroller6.receivedCommentList(req, res);
+});
+
+
+/**
+ * @api {get} /index/my/collectList 我的收藏
+ * @apiDescription 我的收藏
+ * @apiGroup PC端 个人中心
+ * @apiParam {int} userId 用户id
+ * @apiSuccess {Object} result
+ * @apiSuccessExample {json} Success-Response:
+ {
+    "data": {
+        "list": [],
+        "total": 3,
+        "pageSize": "10",
+        "currPage": "3"
+    },
+    "code": 200,
+    "success": true,
+    "message": "请求成功"
+ }
+ * @apiSampleRequest http://localhost:3333:/index/my/collectList
+ * @apiVersion 1.0.0
+ */
+// 帖子评论列表
+route.get('/index/my/collectList', (req, res) => {
+    constroller5.myCollectList(req, res);
+});
+
+/**
+ * @api {get} /index/my/praiseList 我的点赞
+ * @apiDescription 我的点赞
+ * @apiGroup PC端 个人中心
+ * @apiParam {int} userId 用户id
+ * @apiSuccess {Object} result
+ * @apiSuccessExample {json} Success-Response:
+ {
+    "data": {
+        "list": [],
+        "total": 3,
+        "pageSize": "10",
+        "currPage": "3"
+    },
+    "code": 200,
+    "success": true,
+    "message": "请求成功"
+ }
+ * @apiSampleRequest http://localhost:3333:/index/my/praiseList
+ * @apiVersion 1.0.0
+ */
+// 帖子评论列表
+route.get('/index/my/praiseList', (req, res) => {
+    constroller4.myPraiseList(req, res);
+});
 module.exports = () => {
     return route;
 }

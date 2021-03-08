@@ -36,7 +36,7 @@ const getPostCommentList = async function (id,collback){
     }
     collback(list);
 }
-
+// 获取帖子评论列表
 async function CommentList(req,res){
     let id = req.query.id;
     if (id == undefined ) {
@@ -49,7 +49,7 @@ async function CommentList(req,res){
     })
     res.send(response.success(obj));
 }
-
+// 新增评论
 async function addComment(req, res) {
     let id = req.body.id, context = req.body.context, replyUserId = req.body.replyUserId, myId = req.body.myId;
     if (id == undefined || myId == undefined || !context) {
@@ -66,9 +66,47 @@ async function addComment(req, res) {
     res.send(response.success());
 }
 
+// 获取我评论的
+async function myCommentList (req,res){
+    let userId = req.query.userId;
+    if(userId == undefined){
+        res.send(response.fail(statusObj.statusArr[2].code, statusObj.statusArr[2].title));
+        return;
+    }
+    let sql = `SELECT a.*,b.id,b.title,b.icon_src,b.publisher_icon,b.publisher_name,b.source,b.context,b.category_title,d.path from blogs_comment a 
+    LEFT JOIN blogs_post b on a.post_id=b.id
+    LEFT JOIN blogs_user c on b.publisher_id=c.id
+    LEFT JOIN blogs_auth d on b.category_title=d.auth_name WHERE a.comment_user_id=${userId}`;
+    let result = await ConnecDataBaseAPI(sql);
+    let list = [];
+    if(result.length!=0){
+        list = result;
+    }
+    res.send(response.success(list));
+}
 
+// 我收到的评论
+async function receivedCommentList (req,res){
+    let userId = req.query.userId;
+    if(userId == undefined){
+        res.send(response.fail(statusObj.statusArr[2].code, statusObj.statusArr[2].title));
+        return;
+    }
+    let sql = `SELECT a.*, b.title, b.icon_src, b.publisher_icon, b.publisher_name, b.source, b.context, b.category_title, c.id as user_ids, c.nickname, d.path from blogs_comment a 
+    LEFT JOIN blogs_post b on a.post_id=b.id
+    LEFT JOIN blogs_user c on a.comment_user_id=c.id
+    LEFT JOIN blogs_auth d on b.category_title=d.auth_name WHERE a.comment_user_id=${userId}`;
+    let result = await ConnecDataBaseAPI(sql);
+    let list = [];
+    if(result.length!=0){
+        list = result;
+    }
+    res.send(response.success(list));
+}
 
 module.exports = {
     addComment,
-    CommentList
+    CommentList,
+    myCommentList,
+    receivedCommentList
 }

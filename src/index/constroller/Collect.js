@@ -8,7 +8,7 @@ const getTimes = function () {
     s = s.substr(0, s.length - 3)
     return s;
 }
-
+// 收藏
 async function setCollect(req, res) {
     let id = req.body.id, collectType = req.body.collectType, userId = req.body.userId, myId = req.body.myId;
     if (id == undefined || userId == undefined || myId == undefined) {
@@ -35,6 +35,24 @@ async function setCollect(req, res) {
     res.send(response.success());
 }
 
+// 我的收藏
+async function myCollectList (req,res){
+    let userId = req.query.userId;
+    if(userId == undefined){
+        res.send(response.fail(statusObj.statusArr[2].code, statusObj.statusArr[2].title));
+        return;
+    }
+    let sql = `SELECT a.*,b.id,b.title,b.icon_src,b.publisher_icon,b.publisher_name,b.source,b.context,b.category_title,c.path from blogs_collect a 
+    LEFT JOIN blogs_post b on a.post_id=b.id
+    LEFT JOIN blogs_auth c on b.category_title=c.auth_name WHERE a.user_collect_id=${userId} and a.collect=1 ORDER BY a.create_time DESC`;
+    let result = await ConnecDataBaseAPI(sql);
+    let list = [];
+    if(result.length!=0){
+        list = result;
+    }
+    res.send(response.success(list));
+}
 module.exports = {
-    setCollect
+    setCollect,
+    myCollectList
 }
