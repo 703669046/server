@@ -28,8 +28,8 @@ const route = express.Router(); //创建路由路径的链式路由句柄。
  * @apiVersion 1.0.0
  */
 // 文件上传
-route.post('/upload/files', (req, res) => {
-    constroller7.setUserInfo(req, res);
+route.post('/upload/files',constroller2.uploads, (req, res) => {
+    constroller2.uploadFiles(req, res);
 });
 module.exports = () => {
     return route;
