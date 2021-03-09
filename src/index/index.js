@@ -5,10 +5,13 @@ const constroller3 = require('./constroller/Post')
 const constroller4 = require('./constroller/Praise')
 const constroller5 = require('./constroller/Collect')
 const constroller6 = require('./constroller/Comment')
+const constroller7 = require('./constroller/User')
 
 
 const route = express.Router(); //创建路由路径的链式路由句柄。
 //get homePage datas  apidoc -i src/ -o public/apidoc
+
+
 
 /**
  * @api {get} /index/captcha 验证码
@@ -381,6 +384,58 @@ route.get('/index/my/praiseList', (req, res) => {
 // 帖子分页查询
 route.get('/index/my/postlist', (req, res) => {
     constroller3.myPostList(req, res);
+});
+
+/**
+ * @api {get} /index/my/userinfo 我的信息
+ * @apiDescription 我的信息
+ * @apiGroup PC端 个人中心
+ * @apiParam {int} userId 用户id
+ * @apiSuccess {Object} result
+ * @apiSuccessExample {json} Success-Response:
+ {
+    "data": {
+        "list": [],
+        "total": 3,
+        "pageSize": "10",
+        "currPage": "3"
+    },
+    "code": 200,
+    "success": true,
+    "message": "请求成功"
+ }
+ * @apiSampleRequest http://localhost:3333:/index/my/userinfo
+ * @apiVersion 1.0.0
+ */
+// 我的信息
+route.get('/index/my/userinfo', (req, res) => {
+    constroller7.userInfo(req, res);
+});
+
+/**
+ * @api {get} /index/my/userinfo 信息修改
+ * @apiDescription 信息修改
+ * @apiGroup PC端 个人中心
+ * @apiParam {int} id 用户id
+ * @apiSuccess {Object} result
+ * @apiSuccessExample {json} Success-Response:
+ {
+    "data": {
+        "list": [],
+        "total": 3,
+        "pageSize": "10",
+        "currPage": "3"
+    },
+    "code": 200,
+    "success": true,
+    "message": "请求成功"
+ }
+ * @apiSampleRequest http://localhost:3333:/index/my/userinfo
+ * @apiVersion 1.0.0
+ */
+// 我的信息
+route.post('/index/my/setUserInfo', (req, res) => {
+    constroller7.setUserInfo(req, res);
 });
 module.exports = () => {
     return route;

@@ -5,8 +5,8 @@ const server = express();
 const result = require('./libs/result');
 const jwt = require('./libs/token');
 
-server.use(bodyParser.json())
-server.use(bodyParser.urlencoded({ extended: false }));
+server.use(bodyParser.json({limit:'200mb'}))
+server.use(bodyParser.urlencoded({limit:'200mb', extended: false }));
 server.use('/public', express.static('public'))
 
 server.use(cookieParser());
@@ -41,3 +41,4 @@ server.listen(3333, () => {
 
 server.use('/', require('./src/mobile/index')())
 server.use('/', require('./src/index/index')())
+server.use('/', require('./src/public/index')())
