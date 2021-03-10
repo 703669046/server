@@ -136,6 +136,12 @@ async function myPostList(req,res){
         res.send(result.success(obj));
     })
 }
+
+// 帖子新增
+async function postAddData(req,res){
+    console.log(req.body)
+    res.send(result.success());
+}
 module.exports = {
-    postPageList, postInfo,myPostList
+    postPageList, postInfo,myPostList,postAddData
 }

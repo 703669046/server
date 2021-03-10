@@ -139,6 +139,34 @@ route.get('/index/post/info', (req, res) => {
 
 
 /**
+ * @api {get} /index/post/info 帖子详情
+ * @apiDescription 帖子详情
+ * @apiGroup PC端 帖子
+ * @apiParam {int} myId 用户ID
+ * @apiParam {int} id 帖子id
+ * @apiSuccess {Object} result
+ * @apiSuccessExample {json} Success-Response:
+ {
+    "data": {
+        "list": [],
+        "total": 3,
+        "pageSize": "10",
+        "currPage": "3"
+    },
+    "code": 200,
+    "success": true,
+    "message": "请求成功"
+ }
+ * @apiSampleRequest http://localhost:3333/index/post/info
+ * @apiVersion 1.0.0
+ */
+// 帖子详情
+route.post('/index/post/addData', (req, res) => {
+    constroller3.postAddData(req, res);
+});
+
+
+/**
  * @api {post} /index/post/praises 帖子点赞
  * @apiDescription 帖子点赞
  * @apiGroup PC端 帖子
