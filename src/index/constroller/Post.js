@@ -117,7 +117,7 @@ const getPostList = async function (id, pageSize, currPage, total, collback) {
     collback(data)
 }
 // 我发布的帖子
-async function myPostList(req,res){
+async function myPostList(req, res) {
     let id = req.query.id, pageSize = req.query.pageSize, currPage = req.query.currPage;
     if (!id || !pageSize || !currPage) {
         res.send(result.fail(statusObj.statusArr[2].code, statusObj.statusArr[2].title));
@@ -137,11 +137,36 @@ async function myPostList(req,res){
     })
 }
 
+async function getDateInfo(id, table, name, collback) {
+    let sql = `select * from blogs_${table} where ${name}='${id}'`;
+    let res = await ConnecDataBaseAPI(sql);
+    if (res.length != 0) {
+        collback(res[0]);
+    } else {
+        collback({});
+    }
+}
+
 // 帖子新增
-async function postAddData(req,res){
-    console.log(req.body)
-    res.send(result.success());
+async function postAddData(req, res) {
+    let id = req.body.id, title = req.body.title, icon = req.body.icon, source = req.body.source, category = req.body.category, context = req.body.context;
+    if (!id || !title || !source || !category || !context) {
+        res.send(result.fail(statusObj.statusArr[2].code, statusObj.statusArr[2].title));
+        return;
+    }
+    let user = {}, obj = {};
+    await getDateInfo(id, 'user', 'id', item => { user = item });
+    await getDateInfo(category, 'auth', 'auth_name', item => { obj = item });
+    let sql = `INSERT INTO blogs_post (title,icon_src,publisher_id,publisher_icon,publisher_name,source,context,browse,type,category_title,category,sort,create_time,update_time) 
+    VALUES ('${title}','${icon ? icon : null}',${user.id},'${user.figure_url ? user.figure_url : null}','${user.nickname}','${source}','${context}',${0},${1},'${obj.auth_name}',${obj.id},${50},'${getTimes()}','${getTimes()}')`;
+    const date = await ConnecDataBaseAPI(sql);
+    if (date.insertId) {
+
+        res.send(result.success());
+    }else{
+        res.send(result.fail(statusObj.statusArr[8].code, statusObj.statusArr[8].title))
+    }
 }
 module.exports = {
-    postPageList, postInfo,myPostList,postAddData
+    postPageList, postInfo, myPostList, postAddData
 }

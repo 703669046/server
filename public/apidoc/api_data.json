@@ -211,6 +211,104 @@
   },
   {
     "type": "get",
+    "url": "/index/my/userinfo",
+    "title": "我的信息",
+    "description": "<p>我的信息</p>",
+    "group": "PC端_个人中心",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "userId",
+            "description": "<p>用户id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "result",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n   \"data\": {\n       \"list\": [],\n       \"total\": 3,\n       \"pageSize\": \"10\",\n       \"currPage\": \"3\"\n   },\n   \"code\": 200,\n   \"success\": true,\n   \"message\": \"请求成功\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:3333:/index/my/userinfo"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "src/index/index.js",
+    "groupTitle": "PC端_个人中心",
+    "name": "GetIndexMyUserinfo"
+  },
+  {
+    "type": "get",
+    "url": "/index/my/userinfo",
+    "title": "信息修改",
+    "description": "<p>信息修改</p>",
+    "group": "PC端_个人中心",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>用户id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "result",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n   \"data\": {\n       \"list\": [],\n       \"total\": 3,\n       \"pageSize\": \"10\",\n       \"currPage\": \"3\"\n   },\n   \"code\": 200,\n   \"success\": true,\n   \"message\": \"请求成功\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:3333:/index/my/userinfo"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "src/index/index.js",
+    "groupTitle": "PC端_个人中心",
+    "name": "GetIndexMyUserinfo"
+  },
+  {
+    "type": "get",
     "url": "/index/received/commentList",
     "title": "我收到的评论",
     "description": "<p>我收到的评论</p>",
@@ -306,6 +404,62 @@
     "filename": "src/index/index.js",
     "groupTitle": "PC端_帖子",
     "name": "GetIndexPostCommentlist"
+  },
+  {
+    "type": "get",
+    "url": "/index/post/info",
+    "title": "帖子详情",
+    "description": "<p>帖子详情</p>",
+    "group": "PC端_帖子",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "myId",
+            "description": "<p>用户ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>帖子id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "result",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n   \"data\": {\n       \"list\": [],\n       \"total\": 3,\n       \"pageSize\": \"10\",\n       \"currPage\": \"3\"\n   },\n   \"code\": 200,\n   \"success\": true,\n   \"message\": \"请求成功\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:3333/index/post/info"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "src/index/index.js",
+    "groupTitle": "PC端_帖子",
+    "name": "GetIndexPostInfo"
   },
   {
     "type": "get",
@@ -499,8 +653,8 @@
   {
     "type": "post",
     "url": "/index/post/comment",
-    "title": "帖子评论",
-    "description": "<p>帖子评论</p>",
+    "title": "帖子发布",
+    "description": "<p>帖子发布</p>",
     "group": "PC端_帖子",
     "parameter": {
       "fields": {
@@ -510,28 +664,42 @@
             "type": "int",
             "optional": false,
             "field": "id",
-            "description": "<p>帖子id</p>"
+            "description": "<p>用户ID</p>"
           },
           {
             "group": "Parameter",
             "type": "string",
             "optional": false,
             "field": "context",
-            "description": "<p>评论内容</p>"
+            "description": "<p>内容</p>"
           },
           {
             "group": "Parameter",
-            "type": "int",
+            "type": "string",
             "optional": false,
-            "field": "replyUserId",
-            "description": "<p>被回复者id</p>"
+            "field": "category",
+            "description": "<p>类别</p>"
           },
           {
             "group": "Parameter",
-            "type": "int",
+            "type": "string",
             "optional": false,
-            "field": "myId",
-            "description": "<p>用户id</p>"
+            "field": "icon",
+            "description": "<p>首图</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "source",
+            "description": "<p>来源</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "title",
+            "description": "<p>标题</p>"
           }
         ]
       }
@@ -818,5 +986,54 @@
     "version": "1.0.0",
     "filename": "src/index/index.js",
     "groupTitle": "PC端_用户"
+  },
+  {
+    "type": "get",
+    "url": "/upload/files",
+    "title": "文件上传",
+    "description": "<p>文件上传</p>",
+    "group": "文件上传",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>用户id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "result",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n   \"data\": {\n       \"list\": [],\n       \"total\": 3,\n       \"pageSize\": \"10\",\n       \"currPage\": \"3\"\n   },\n   \"code\": 200,\n   \"success\": true,\n   \"message\": \"请求成功\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "http://localhost:3333:/upload/files"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "src/public/index.js",
+    "groupTitle": "文件上传",
+    "name": "GetUploadFiles"
   }
 ]

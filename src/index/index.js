@@ -225,13 +225,15 @@ route.post('/index/post/collect', (req, res) => {
 });
 
 /**
- * @api {post} /index/post/comment 帖子评论
- * @apiDescription 帖子评论
+ * @api {post} /index/post/comment 帖子发布
+ * @apiDescription 帖子发布
  * @apiGroup PC端 帖子
- * @apiParam {int} id 帖子id
- * @apiParam {string} context 评论内容
- * @apiParam {int} replyUserId 被回复者id
- * @apiParam {int} myId 用户id
+ * @apiParam {int} id 用户ID
+ * @apiParam {string} context 内容
+ * @apiParam {string} category 类别
+ * @apiParam {string} icon 首图
+ * @apiParam {string} source 来源
+ * @apiParam {string} title 标题
  * @apiSuccess {Object} result
  * @apiSuccessExample {json} Success-Response:
  {
