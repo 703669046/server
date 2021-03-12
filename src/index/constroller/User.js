@@ -10,7 +10,6 @@ const getTimes = function () {
 }
 // 收藏
 async function setUserInfo(req, res) {
-    console.log(req.body)
     let id = req.body.id, data = req.body;
     data.label = data.label.toString()
     if (id == undefined) {
@@ -20,7 +19,6 @@ async function setUserInfo(req, res) {
     let sql = `UPDATE blogs_user SET blogs_user.nickname='${data.nickname}',blogs_user.figure_url='${data.figure_url}',blogs_user.email='${data.email}',blogs_user.label='${data.label}',blogs_user.explains='${data.explains}',blogs_user.github='${data.github}',blogs_user.company='${data.company}',blogs_user.position='${data.position}',blogs_user.location='${data.location}',blogs_user.age='${data.age}',blogs_user.qq='${data.qq}',update_time='${getTimes()}' WHERE id=${id}`;
     let result = await ConnecDataBaseAPI(sql);
     let obj = {};
-    console.log(result,protocol41)
     res.send(response.success());
 }
 

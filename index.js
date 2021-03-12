@@ -5,6 +5,8 @@ const server = express();
 const result = require('./libs/result');
 const jwt = require('./libs/token');
 
+require('./utils/websocket')
+
 server.use(bodyParser.json({limit:'200mb'}))
 server.use(bodyParser.urlencoded({limit:'200mb', extended: false }));
 server.use('/public', express.static('public'))
@@ -38,7 +40,6 @@ server.all('*', function (req, res, next) {
 server.listen(3333, () => {
     console.log("正在监听3333端口");
 });
-
 server.use('/', require('./src/mobile/index')())
 server.use('/', require('./src/index/index')())
 server.use('/', require('./src/public/index')())
