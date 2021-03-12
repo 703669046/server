@@ -14,7 +14,7 @@ server.use('/public', express.static('public'))
 server.use(cookieParser());
 
 // 免验证路由
-const noLogin = ['/mobile/login', '/index/login', '/index/register', '/index/captcha']
+const noLogin = ['/mobile/login', '/index/login', '/admin/login', '/index/register', '/index/captcha', '/admin/captcha']
 
 //the cores config
 server.all('*', function (req, res, next) {
@@ -42,4 +42,5 @@ server.listen(3333, () => {
 });
 server.use('/', require('./src/mobile/index')())
 server.use('/', require('./src/index/index')())
+server.use('/', require('./src/admin/index')())
 server.use('/', require('./src/public/index')())
